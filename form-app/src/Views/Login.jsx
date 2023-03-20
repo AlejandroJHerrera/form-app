@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../Reducers/userSlice';
+import axios from '../config';
 
 function Login() {
   const emailField = useRef(null);
@@ -10,16 +11,20 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
-      setUser({
-        email: emailField.current.value,
-        fullName: nameField.current.value,
-        token: Date.now(),
-      })
-    );
-    navigate('/');
+    let url = `/auth/login`;
+    let user = {
+      email: emailField.current.value,
+      password: nameField.current.value,
+    };
+
+    try {
+      const res = await axios.post(url, user);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
