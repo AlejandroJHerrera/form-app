@@ -16,8 +16,8 @@ function Form() {
     );
 
   return (
-    <div className="h-screen flex justify-center items-center bg-slate-600">
-      <form className="className=border rounded-md shadow-xl p-5 bg-slate-200 space-y-2">
+    <div className=" flex justify-center items-center bg-slate-600 ">
+      <form className="className=border rounded-md shadow-xl p-5 bg-slate-200 space-y-2 my-5">
         <h1 className="text-2xl text-center mb-2">Formulario</h1>
         <div className="space-x-2">
           <span>Fecha</span>
@@ -37,8 +37,7 @@ function Form() {
         <div className="space-x-2 ">
           <span>Factibilidad Técnica</span>
           <input type="checkbox" /> <span>Si</span>
-          <input type="checkbox" />
-          <span>No</span>
+          <input type="checkbox" /> <span>No</span>
         </div>
 
         <div className="space-x-3">
@@ -139,6 +138,12 @@ function Form() {
           <input type="number" className="border rounded-sm" />
         </div>
         <button className="border rounded-sm w-20">Firmar</button>
+
+        <div className="flex justify-center mt-5">
+          <button className="rounded-md p-2 bg-green-500" type="button">
+            Enviar
+          </button>
+        </div>
       </form>
     </div>
   );
