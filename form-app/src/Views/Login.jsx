@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../Reducers/userSlice';
@@ -11,6 +11,27 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const token = JSON.parse(localStorage.getItem('token'));
+
+  useEffect(() => {
+    const verifyToken = () => {
+      if (token) {
+        dispatch(
+          setUser({
+            fullName: token.fullName,
+            email: token.email,
+            dni: token.dni,
+            isAdmin: token.isAdmin,
+            signature: token.signature,
+            id: token._id,
+          })
+        );
+        navigate('/');
+      }
+    };
+    verifyToken();
+  }, [dispatch, token, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let url = `/auth/login`;
@@ -21,11 +42,15 @@ function Login() {
 
     try {
       const res = await axios.post(url, user, { withCredentials: true });
+      localStorage.setItem('token', JSON.stringify(res.data));
       dispatch(
         setUser({
           email: res.data.email,
           fullName: res.data.fullName,
-          token: user.password,
+          dni: res.data.dni,
+          isAdmin: res.data.isAdmin,
+          signature: res.data.signature,
+          id: res.data._id,
         })
       );
       navigate('/');

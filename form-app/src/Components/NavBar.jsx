@@ -13,6 +13,7 @@ function NavBar() {
     let url = '/auth/logout';
     try {
       await axios.get(url, { withCredentials: true });
+      localStorage.removeItem('token');
       dispatch(unSetUser());
       navigate('/login');
     } catch (error) {
@@ -23,7 +24,7 @@ function NavBar() {
   return (
     <div>
       <ul className="flex justify-around w-full bg-slate-600 text-slate-200">
-        <Link to={'/'}>
+        <Link to={user.fullName.length === 0 ? '/login' : '/'}>
           <li>Home</li>
         </Link>
         {user.fullName.length === 0 ? (
