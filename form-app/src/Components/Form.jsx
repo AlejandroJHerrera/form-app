@@ -1,9 +1,23 @@
-import React from 'react';
+import Popup from 'reactjs-popup';
+import '../App.css';
+import SignaturePad from 'react-signature-canvas';
+import { useRef } from 'react';
 
 function Form() {
+  const sigCanvasClient = useRef({});
+
+  const cleanCanvas = () => {
+    sigCanvasClient.current.clear();
+  };
+
+  const saveCanvas = () =>
+    console.log(
+      sigCanvasClient.current.getTrimmedCanvas().toDataURL('image/png')
+    );
+
   return (
     <div className="h-screen flex justify-center items-center bg-slate-600">
-      <form className="className=border rounded-md shadow-xl p-5 bg-slate-200">
+      <form className="className=border rounded-md shadow-xl p-5 bg-slate-200 space-y-2">
         <h1 className="text-2xl text-center mb-2">Formulario</h1>
         <div className="space-x-2">
           <span>Fecha</span>
@@ -21,7 +35,7 @@ function Form() {
         </div>
 
         <div className="space-x-2 ">
-          <span>Factibilidad Tecnica</span>
+          <span>Factibilidad Técnica</span>
           <input type="checkbox" /> <span>Si</span>
           <input type="checkbox" />
           <span>No</span>
@@ -43,7 +57,7 @@ function Form() {
         </div>
 
         <div className="space-x-3">
-          <span>Direccion</span>
+          <span>Dirección</span>
           <input type="text" className="border rounded-sm" />
         </div>
 
@@ -81,9 +95,40 @@ function Form() {
           <span>Identidad</span>
           <input type="number" className="border rounded-sm" />
         </div>
-        <button className="border rounded-sm w-20">Firmar</button>
 
-        <h1 className="text-xl  mb-2">Tecnico</h1>
+        <Popup
+          modal
+          contentStyle={{ className: 'w-44' }}
+          trigger={
+            <button className="border rounded-sm w-20 " type="button">
+              Firmar
+            </button>
+          }
+          closeOnDocumentClick={false}
+        >
+          {(close) => (
+            <>
+              <SignaturePad
+                canvasProps={{ className: 'w-full h-64' }}
+                ref={sigCanvasClient}
+              />
+              <div className="flex justify-around">
+                {' '}
+                <button onClick={close} className="rounded-md border p-1">
+                  Cerrar
+                </button>
+                <button onClick={cleanCanvas} className="rounded-md border p-1">
+                  Limpiar
+                </button>
+                <button onClick={saveCanvas} className="rounded-md border p-1">
+                  Guardar
+                </button>
+              </div>
+            </>
+          )}
+        </Popup>
+
+        <h1 className="text-xl  mb-2">Técnico</h1>
         <div className="space-x-4">
           <span>Nombre </span>
           <input type="text" className="border rounded-sm" />

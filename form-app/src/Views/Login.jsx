@@ -6,7 +6,7 @@ import axios from '../config';
 
 function Login() {
   const emailField = useRef(null);
-  const nameField = useRef(null);
+  const passField = useRef(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,12 +16,19 @@ function Login() {
     let url = `/auth/login`;
     let user = {
       email: emailField.current.value,
-      password: nameField.current.value,
+      password: passField.current.value,
     };
 
     try {
       const res = await axios.post(url, user, { withCredentials: true });
-      console.log(res.data);
+      dispatch(
+        setUser({
+          email: res.data.email,
+          fullName: res.data.fullName,
+          token: user.password,
+        })
+      );
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -34,10 +41,9 @@ function Login() {
         onSubmit={handleSubmit}
       >
         <h1>Login</h1>
-        <input type="text" placeholder="Name" ref={nameField} />
         <input type="email" placeholder="Email" ref={emailField} />
-        <input type="password" placeholder="Password" />
-        <button className="rounded-md bg-blue"> Submit</button>
+        <input type="password" placeholder="Password" ref={passField} />
+        <button className="rounded-md p-2"> Submit</button>
       </form>
     </div>
   );
