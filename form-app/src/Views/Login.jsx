@@ -20,7 +20,7 @@ function Login() {
     };
 
     try {
-      const res = await axios.post(url, user);
+      const res = await axios.post(url, user, { withCredentials: true });
       console.log(res.data);
     } catch (error) {
       console.log(error);
