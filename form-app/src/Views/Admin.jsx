@@ -1,6 +1,7 @@
 import AdminNavBar from '../Components/AdminNavBar';
 import FormList from '../Components/FormList';
 import { useSelector } from 'react-redux';
+import TechList from '../Components/TechList';
 
 function Admin() {
   const user = useSelector((state) => state.user);
@@ -35,12 +36,7 @@ function Admin() {
               <span>Teléfono</span>
               <span>Admin</span>
             </div>
-            <div className="grid grid-cols-4 gap-5">
-              <span>Chonson</span>
-              <span>Y4567s</span>
-              <span>655584445</span>
-              <span>Jose</span>
-            </div>
+            <TechList user={user} />
           </div>
         </div>
       </div>
