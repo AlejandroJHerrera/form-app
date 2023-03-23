@@ -26,7 +26,12 @@ function Login() {
             id: token._id,
           })
         );
-        navigate('/');
+
+        if (token.isAdmin) {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       }
     };
     verifyToken();
@@ -53,7 +58,11 @@ function Login() {
           id: res.data._id,
         })
       );
-      navigate('/');
+      if (res.data.isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       console.log(error);
     }

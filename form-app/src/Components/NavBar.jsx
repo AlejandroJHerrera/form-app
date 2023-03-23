@@ -23,20 +23,41 @@ function NavBar() {
 
   return (
     <div>
-      <ul className="flex justify-around w-full bg-slate-600 text-slate-200">
-        <Link to={user.fullName.length === 0 ? '/login' : '/'}>
-          <li>Home</li>
-        </Link>
-        {user.fullName.length === 0 ? (
-          <Link to={'/login'}>
-            <li>Iniciar Sesion</li>
-          </Link>
-        ) : (
-          <Link onClick={logOut}>
-            <li>Cerrar Sesion</li>
-          </Link>
-        )}
-      </ul>
+      {user.isAdmin ? (
+        <>
+          <ul className="flex justify-around w-full bg-slate-600 text-slate-200">
+            <Link to={user.fullName.length === 0 ? '/login' : '/admin'}>
+              <li>Home</li>
+            </Link>
+            {user.fullName.length === 0 ? (
+              <Link to={'/login'}>
+                <li>Iniciar Sesion</li>
+              </Link>
+            ) : (
+              <Link onClick={logOut}>
+                <li>Cerrar Sesion</li>
+              </Link>
+            )}
+          </ul>
+        </>
+      ) : (
+        <>
+          <ul className="flex justify-around w-full bg-slate-600 text-slate-200">
+            <Link to={user.fullName.length === 0 ? '/login' : '/'}>
+              <li>Home</li>
+            </Link>
+            {user.fullName.length === 0 ? (
+              <Link to={'/login'}>
+                <li>Iniciar Sesion</li>
+              </Link>
+            ) : (
+              <Link onClick={logOut}>
+                <li>Cerrar Sesion</li>
+              </Link>
+            )}
+          </ul>
+        </>
+      )}
     </div>
   );
 }

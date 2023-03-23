@@ -46,6 +46,7 @@ export const findForm = async (req, res, next) => {
 };
 
 export const findTech = async (req, res, next) => {
+  debugger;
   try {
     const tech = await Form.find({ technicianID: req.body.technicianID });
 

@@ -63,7 +63,7 @@ function Form() {
   };
 
   return (
-    <div className=" flex justify-center items-center bg-slate-600 ">
+    <div className=" flex justify-center items-center bg-slate-600 h-screen ">
       <form
         className="className=border rounded-md shadow-xl p-5 bg-slate-200 space-y-2 my-5"
         onSubmit={handleSubmit}
