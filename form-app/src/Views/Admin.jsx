@@ -5,7 +5,7 @@ import TechList from '../Components/TechList';
 
 function Admin() {
   const user = useSelector((state) => state.user);
-
+  //TODO: Add onClick to AdminNavBar to show active selection and hide rest.
   return (
     <div className="h-screen bg-slate-600 ">
       <AdminNavBar />

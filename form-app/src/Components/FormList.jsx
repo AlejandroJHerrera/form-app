@@ -25,12 +25,8 @@ function FormList({ user }) {
     <div>
       {!data ? (
         <>
-          <div className="grid grid-cols-5 gap-3 h-40 overflow-y-hidden">
-            <span>No data</span>
-            <span>No data</span>
-            <span>No data</span>
-            <span>No data</span>
-            <span>Icono</span>
+          <div className="flex justify-center items-center h-40 overflow-y-hidden">
+            <h1>No hay información disponible</h1>
           </div>
         </>
       ) : (

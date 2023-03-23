@@ -17,6 +17,21 @@ export const apiSlice = createApi({
         body: technicianID,
       }),
     }),
+    getAllAdmins: builder.query({
+      query: () => '/user/allAdmins',
+    }),
+    /* This query searches for all tech under the same admin by its Name */
+    searchAdminTechs: builder.mutation({
+      query: (Admin) => ({
+        url: '/user/techs',
+        method: 'POST',
+        body: Admin,
+      }),
+    }),
   }),
 });
-export const { useGetFormsQuery, useSearchUserFormsMutation } = apiSlice;
+export const {
+  useGetFormsQuery,
+  useSearchUserFormsMutation,
+  useSearchAdminTechsMutation,
+} = apiSlice;
